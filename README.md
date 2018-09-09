@@ -41,5 +41,4 @@ Documentation is still in progress. Example usage:
 ```php
 $property = MonthlyCloud::endpoint('properties')->find(1); // Single property
 $properties = MonthlyCloud::endpoint('properties')->get(); // List of properties
-],
 ```
