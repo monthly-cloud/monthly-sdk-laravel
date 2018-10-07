@@ -30,7 +30,7 @@ Add Monthly Cloud service provider and alias to your config/app.php config:
 To create configuration file run:
 
 ``` bash
-php artisan vendor:publish --provider="MonthlyCloud\Laravel\MonthlyCloudServiceProvider
+php artisan vendor:publish --provider="MonthlyCloud\Laravel\MonthlyCloudServiceProvider"
 ```
 
 Update .env file MONTHLY_CLOUD_ACCESS_TOKEN variable or config/monthlycloud.php access_token with access token generated in cloud settings.
