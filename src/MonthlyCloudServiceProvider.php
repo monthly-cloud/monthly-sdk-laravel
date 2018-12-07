@@ -25,10 +25,13 @@ class MonthlyCloudServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Builder::class, function ($app) {
-            return new Builder(
+            $builder = new Builder(
                 config('monthlycloud.access_token'),
                 config('monthlycloud.api_url')
             );
+            $builder->setCache(new \MonthlyCloud\Laravel\Cache(config('monthlycloud.cache_store')));
+
+            return $builder;
         });
         if ($this->app->runningInConsole()) {
             $this->publishes([
