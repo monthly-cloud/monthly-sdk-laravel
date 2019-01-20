@@ -2,8 +2,10 @@
 
 namespace MonthlyCloud\Laravel;
 
-use Illuminate\Support\ServiceProvider;
 use MonthlyCloud\Sdk\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\ServiceProvider;
+use MonthlyCloud\Laravel\Providers\MonthlyCloudUserProvider;
 
 class MonthlyCloudServiceProvider extends ServiceProvider
 {
@@ -14,7 +16,11 @@ class MonthlyCloudServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Auth::provider('cloud', function ($app, array $config) {
+            return new MonthlyCloudUserProvider($app['hash'], $config['model']);
+        });
+
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
     }
 
     /**
