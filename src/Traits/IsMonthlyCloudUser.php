@@ -3,9 +3,12 @@
 namespace MonthlyCloud\Laravel\Traits;
 
 use Illuminate\Support\Facades\Crypt;
+use MonthlyCloud\Sdk\Builder;
 
 trait IsMonthlyCloudUser
 {
+    private $cloud;
+
     /**
      * Set cloud access token.
      *
@@ -46,5 +49,23 @@ trait IsMonthlyCloudUser
         $this->name = $userData->label;
 
         return $this;
+    }
+
+    /**
+     * Get cloud builder.
+     *
+     * @return MonthlyCloud\Sdk\Builder
+     */
+    public function cloud()
+    {
+        if (empty($this->cloud)) {
+            $this->cloud = new Builder(
+                $this->getAccessToken(),
+                config('monthlycloud.api_url')
+            );
+            $this->cloud->setCache(new \MonthlyCloud\Laravel\Cache(config('monthlycloud.cache_store')));
+        }
+
+        return $this->cloud;
     }
 }
