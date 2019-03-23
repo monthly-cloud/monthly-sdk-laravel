@@ -42,3 +42,35 @@ Documentation is still in progress. Example usage:
 $property = MonthlyCloud::endpoint('properties')->find(1); // Single property
 $properties = MonthlyCloud::endpoint('properties')->get(); // List of properties
 ```
+
+### User log-in
+
+Monthly Cloud is compatible with Laravel Authentication.
+
+You can setup authentication by running:
+
+```
+php artisan make:auth
+php artisan migrate
+```
+
+Setup cloud provider in auth.php:
+```
+    'guards' => [
+        'web' => [
+            ...
+            'provider' => 'cloud',
+        ],
+    ...
+    'providers' => [
+        'cloud' => [
+            'driver' => 'cloud',
+            'model' => App\User::class,
+        ],
+        ...
+    ],
+```
+
+Add IsMonthlyCloudUser trait to User model. By default it will store cloud "label" in $user->name and save it in database.
+
+If you need more information in local database check `applyUserData` method in `IsMonthlyCloudUser` trait.
