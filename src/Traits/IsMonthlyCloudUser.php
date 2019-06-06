@@ -46,6 +46,7 @@ trait IsMonthlyCloudUser
      */
     public function applyUserData($userData)
     {
+        $this->id = $userData->id;
         $this->name = $userData->label;
 
         return $this;
