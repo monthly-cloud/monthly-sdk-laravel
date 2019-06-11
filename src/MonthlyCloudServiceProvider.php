@@ -36,6 +36,7 @@ class MonthlyCloudServiceProvider extends ServiceProvider
                 config('monthlycloud.api_url')
             );
             $builder->setCache(new \MonthlyCloud\Laravel\Cache(config('monthlycloud.cache_store')));
+            $builder->cacheTtl(config('monthlycloud.cache_ttl', 60));
 
             return $builder;
         });
