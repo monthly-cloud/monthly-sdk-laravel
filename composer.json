@@ -20,5 +20,16 @@
         "psr-4": {
             "MonthlyCloud\\Laravel\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MonthlyCloud\\Laravel\\MonthlyCloudServiceProvider"
+            ],
+            "aliases": {
+                "MonthlyCloud": "MonthlyCloud\\Laravel\\MonthlyCloud",
+                "MonthlyStorage": "MonthlyCloud\\Laravel\\MonthlyStorage"
+            }
+        }
     }
 }
