@@ -2,11 +2,11 @@
 
 namespace MonthlyCloud\Laravel;
 
-use MonthlyCloud\Sdk\Builder;
-use MonthlyCloud\Sdk\StorageBuilder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use MonthlyCloud\Laravel\Providers\MonthlyCloudUserProvider;
+use MonthlyCloud\Sdk\Builder;
+use MonthlyCloud\Sdk\StorageBuilder;
 
 class MonthlyCloudServiceProvider extends ServiceProvider
 {

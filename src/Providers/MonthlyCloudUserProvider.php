@@ -5,9 +5,9 @@ namespace MonthlyCloud\Laravel\Providers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Auth\EloquentUserProvider;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use MonthlyCloud\Sdk\Builder;
-use Illuminate\Support\Facades\Hash;
 
 class MonthlyCloudUserProvider extends EloquentUserProvider
 {
@@ -31,7 +31,7 @@ class MonthlyCloudUserProvider extends EloquentUserProvider
             array_key_exists('password', $credentials))) {
             return;
         }
-        if (!$this->retrieveModelByCredentials($credentials)) {
+        if (! $this->retrieveModelByCredentials($credentials)) {
             if ($accessToken = $this->getAccessTokenByCredentials($credentials)) {
                 $userData = $this->getUserDataByAccessToken($accessToken);
                 $model = $this->createModel();
@@ -52,7 +52,7 @@ class MonthlyCloudUserProvider extends EloquentUserProvider
                 return $model;
             }
             // Wrong crdentials.
-            return null;
+            return;
         }
 
         return $this->retrieveModelByCredentials($credentials);
@@ -79,7 +79,6 @@ class MonthlyCloudUserProvider extends EloquentUserProvider
 
         return $query->first();
     }
-
 
     /**
      * Get headers used in api calls.
@@ -120,7 +119,7 @@ class MonthlyCloudUserProvider extends EloquentUserProvider
      * Get access token by credentials or false in case of error.
      *
      * @param array $credentials
-     * @return boolean|string 
+     * @return bool|string
      */
     public function getAccessTokenByCredentials(array $credentials)
     {
@@ -131,16 +130,17 @@ class MonthlyCloudUserProvider extends EloquentUserProvider
         try {
             $this->response = $this->client->request(
                 'POST',
-                $this->getApiUrl() . 'login',
+                $this->getApiUrl().'login',
                 [
                     'headers' => $this->getHeaders(),
-                    'json' => $credentials
+                    'json' => $credentials,
                 ]
             );
             $response = json_decode($this->response->getBody());
             if (empty($response->data->access_token)) {
                 return false;
             }
+
             return $response->data->access_token;
         } catch (ClientException $e) {
             return false;
