@@ -22,6 +22,7 @@ Add Monthly Cloud service provider and alias to your config/app.php config:
 'aliases' => [
     ...
     'MonthlyCloud' => MonthlyCloud\Laravel\MonthlyCloud::class,
+    'MonthlyStorage' => MonthlyCloud\Laravel\MonthlyStorage::class,
 ],
 ```
 
@@ -37,11 +38,20 @@ Update .env file MONTHLY_CLOUD_ACCESS_TOKEN variable or config/monthlycloud.php 
 
 ### Usage
 
-Documentation is still in progress. Example usage:
+Example usage of Monthly Cloud sdk:
 ```php
 $property = MonthlyCloud::endpoint('properties')->find(1); // Single property
 $properties = MonthlyCloud::endpoint('properties')->get(); // List of properties
 ```
+
+Example usage of Monthly Storage sdk:
+```php
+MonthlyStorage::endpoint('routes')->get();
+MonthlyStorage::endpoint('menus')->locale('en')->get();
+MonthlyStorage::endpoint('contents')->find(31);
+MonthlyStorage::endpoint('contents')->website(3)->id(31)->buildUrl();
+```
+
 
 ### User log-in
 
