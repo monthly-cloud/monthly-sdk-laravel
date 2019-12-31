@@ -46,10 +46,10 @@ $properties = MonthlyCloud::endpoint('properties')->get(); // List of properties
 
 Example usage of Monthly Storage sdk:
 ```php
-MonthlyStorage::endpoint('routes')->get();
-MonthlyStorage::endpoint('menus')->locale('en')->get();
-MonthlyStorage::endpoint('contents')->find(31);
-MonthlyStorage::endpoint('contents')->website(3)->id(31)->buildUrl();
+MonthlyStorage::endpoint('routes')->get(); // get routes using default app language
+MonthlyStorage::endpoint('menus')->locale('en')->get(); // get menus in pre-defined language
+MonthlyStorage::endpoint('contents')->find(31); // find content
+MonthlyStorage::endpoint('contents')->website(3)->id(31)->buildUrl(); // build file url for specific website and content id
 ```
 
 
