@@ -3,6 +3,7 @@
 namespace MonthlyCloud\Laravel;
 
 use MonthlyCloud\Sdk\Builder;
+use MonthlyCloud\Sdk\StorageBuilder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use MonthlyCloud\Laravel\Providers\MonthlyCloudUserProvider;
@@ -35,6 +36,19 @@ class MonthlyCloudServiceProvider extends ServiceProvider
                 config('monthlycloud.access_token'),
                 config('monthlycloud.api_url')
             );
+            $builder->setCache(new \MonthlyCloud\Laravel\Cache(config('monthlycloud.cache_store')));
+            $builder->cacheTtl(config('monthlycloud.cache_ttl', 60));
+
+            return $builder;
+        });
+        $this->app->singleton(StorageBuilder::class, function ($app) {
+            $builder = new StorageBuilder(
+                config('monthlycloud.storage_url')
+            );
+            if ($websiteId = config('monthlycloud.website_id')) {
+                $builder->website($websiteId);
+            }
+            $builder->locale($this->app->getLocale());
             $builder->setCache(new \MonthlyCloud\Laravel\Cache(config('monthlycloud.cache_store')));
             $builder->cacheTtl(config('monthlycloud.cache_ttl', 60));
 
