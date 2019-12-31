@@ -12,7 +12,7 @@ trait IsMonthlyCloudUser
     /**
      * Set cloud access token.
      *
-     * @param string $accessToken 
+     * @param string $accessToken
      * @return self
      */
     public function setAccessToken($accessToken)
@@ -29,18 +29,16 @@ trait IsMonthlyCloudUser
      */
     public function getAccessToken()
     {
-        if (!empty($this->access_token)) {
+        if (! empty($this->access_token)) {
             return Crypt::decryptString($this->access_token);
         }
-
-        return null;
     }
 
     /**
      * Apply data from cloud user to current model.
-     * 
+     *
      * For example set name equal to cloud label.
-     * 
+     *
      * @param object $userData
      * @return self
      */

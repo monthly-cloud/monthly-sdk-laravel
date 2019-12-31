@@ -2,41 +2,41 @@
 
 namespace MonthlyCloud\Laravel;
 
-use MonthlyCloud\Sdk\Cache\CacheInterface;
 use Illuminate\Support\Facades\Cache as LaravelCache;
+use MonthlyCloud\Sdk\Cache\CacheInterface;
 
 class Cache implements CacheInterface
 {
-	/**
-	 * @var string
-	 */
-	protected $store;
+    /**
+     * @var string
+     */
+    protected $store;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param string $store Cache store
-	 * @return void
-	 */
-	public function __construct($store = null)
-	{
-		if (empty($store)) {
-			$store = config('cache.default');
-		}
+    /**
+     * Constructor.
+     *
+     * @param string $store Cache store
+     * @return void
+     */
+    public function __construct($store = null)
+    {
+        if (empty($store)) {
+            $store = config('cache.default');
+        }
 
-		$this->store = $store;
-	}
+        $this->store = $store;
+    }
 
-	/**
-	 * Hash key to avoid issues with special chars.
-	 *
-	 * @param string $key 
-	 * @return string
-	 */
-	public function hashKey($key)
-	{
-		return md5($key);
-	}
+    /**
+     * Hash key to avoid issues with special chars.
+     *
+     * @param string $key
+     * @return string
+     */
+    public function hashKey($key)
+    {
+        return md5($key);
+    }
 
     /**
      * Retrieve an item from the cache by key.
@@ -44,9 +44,10 @@ class Cache implements CacheInterface
      * @param  string|array  $key
      * @return mixed
      */
-    public function get($key) {
-		return LaravelCache::store($this->store)
-			->get($this->hashKey($key));
+    public function get($key)
+    {
+        return LaravelCache::store($this->store)
+            ->get($this->hashKey($key));
     }
 
     /**
@@ -57,13 +58,14 @@ class Cache implements CacheInterface
      * @param  int     $ttl
      * @return void
      */
-    public function put($key, $value, $ttl = 0) {
-		return LaravelCache::store($this->store)
-			->put(
-				$this->hashKey($key),
-				$value,
-				now()->addSeconds($ttl)
-			);
+    public function put($key, $value, $ttl = 0)
+    {
+        return LaravelCache::store($this->store)
+            ->put(
+                $this->hashKey($key),
+                $value,
+                now()->addSeconds($ttl)
+            );
     }
 
     /**
@@ -72,9 +74,10 @@ class Cache implements CacheInterface
      * @param  string  $key
      * @return bool
      */
-    public function forget($key) {
-		return LaravelCache::store($this->store)
-			->forget($this->hashKey($key));
+    public function forget($key)
+    {
+        return LaravelCache::store($this->store)
+            ->forget($this->hashKey($key));
     }
 
     /**
@@ -83,8 +86,9 @@ class Cache implements CacheInterface
      * @param  string  $key
      * @return bool
      */
-    public function has($key) {
-		return LaravelCache::store($this->store)
-			->forget($this->hashKey($key));
+    public function has($key)
+    {
+        return LaravelCache::store($this->store)
+            ->forget($this->hashKey($key));
     }
 }
