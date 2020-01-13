@@ -45,6 +45,9 @@ class MonthlyCloudServiceProvider extends ServiceProvider
             $builder = new StorageBuilder(
                 config('monthlycloud.storage_url')
             );
+            if ($listingId = config('monthlycloud.listing_id')) {
+                $builder->listing($listingId);
+            }
             if ($websiteId = config('monthlycloud.website_id')) {
                 $builder->website($websiteId);
             }
