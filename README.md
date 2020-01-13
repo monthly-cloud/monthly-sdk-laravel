@@ -34,7 +34,9 @@ To create configuration file run:
 php artisan vendor:publish --provider="MonthlyCloud\Laravel\MonthlyCloudServiceProvider"
 ```
 
-Update .env file MONTHLY_CLOUD_ACCESS_TOKEN variable or config/monthlycloud.php access_token with access token generated in cloud settings.
+In oprder to access cloud API update .env file `MONTHLY_CLOUD_ACCESS_TOKEN` variable or `config/monthlycloud.php` access_token with access token generated in cloud settings.
+
+To use Monthly Storage set `MONTHLY_CLOUD_WEBSITE_ID` and `MONTHLY_CLOUD_LISTING_ID`.
 
 ### Usage
 
@@ -50,6 +52,10 @@ MonthlyStorage::endpoint('routes')->get(); // get routes using default app langu
 MonthlyStorage::endpoint('menus')->locale('en')->get(); // get menus in pre-defined language
 MonthlyStorage::endpoint('contents')->find(31); // find content
 MonthlyStorage::endpoint('contents')->website(3)->id(31)->buildUrl(); // build file url for specific website and content id
+
+MonthlyStorage::getListingItem()->find(100); // find listing item
+MonthlyStorage::findContent(1); // quick way to find content
+MonthlyStorage::getRoutes('en'); // quick way to access routes
 ```
 
 
