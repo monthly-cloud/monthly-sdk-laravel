@@ -58,6 +58,23 @@ MonthlyStorage::findContent(1); // quick way to find content
 MonthlyStorage::getRoutes('en'); // quick way to access routes
 ```
 
+Example usage of Translation Service:
+```php
+/**
+ * Get key from translations dictionary.
+ *
+ * @param string|null $key
+ * @return string|array
+ */
+function __t($key = null)
+{
+	if (empty($key)) {
+		return app(\MonthlyCloud\Laravel\Services\TranslationService::class)->getTranslations();
+	}
+
+	return app(\MonthlyCloud\Laravel\Services\TranslationService::class)->translate($key);
+}
+```
 
 ### User log-in
 
