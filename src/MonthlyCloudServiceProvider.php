@@ -5,6 +5,7 @@ namespace MonthlyCloud\Laravel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use MonthlyCloud\Laravel\Providers\MonthlyCloudUserProvider;
+use MonthlyCloud\Laravel\Services\TranslationService;
 use MonthlyCloud\Sdk\Builder;
 use MonthlyCloud\Sdk\StorageBuilder;
 
@@ -40,6 +41,9 @@ class MonthlyCloudServiceProvider extends ServiceProvider
             $builder->cacheTtl(config('monthlycloud.cache_ttl', 60));
 
             return $builder;
+        });
+        $this->app->singleton(TranslationService::class, function ($app) {
+            return new TranslationService();
         });
         $this->app->singleton(StorageBuilder::class, function ($app) {
             $builder = new StorageBuilder(
