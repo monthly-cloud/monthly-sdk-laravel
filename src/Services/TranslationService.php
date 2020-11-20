@@ -16,6 +16,16 @@ class TranslationService
     protected $translations = [];
 
     /**
+     * Get app locale.
+     *
+     * @return string
+     */
+    public function getDefaultLocale()
+    {
+        return App::getLocale();
+    }
+
+    /**
      * Translate key using storage dictionary.
      *
      * @param string $key
@@ -25,7 +35,7 @@ class TranslationService
     public function translate($key, $locale = null)
     {
         if (empty($locale)) {
-            $locale = App::getLocale();
+            $locale = $this->getDefaultLocale();
         }
 
         $translations = $this->getTranslations($locale);
@@ -46,21 +56,41 @@ class TranslationService
     public function getTranslations($locale = null)
     {
         if (empty($locale)) {
-            $locale = App::getLocale();
+            $locale = $this->getDefaultLocale();
         }
 
         if (empty($this->translations[$locale])) {
-            // Get translations from storage.
-            $translations = MonthlyStorage::endpoint('locales')
-                ->locale($locale)
-                ->get();
-
-            // Turn object to array.
-            $translations = json_decode(json_encode($translations), true);
-
-            // Multi dimensions array to dot array.
-            $this->translations[$locale] = Arr::dot($translations);
+            $this->loadTranslations($locale);
         }
+
+        return $this->translations[$locale];
+    }
+
+    /**
+     * Load translations from storage.
+     *
+     * Example output:
+     * ['features.internet' => 'Internet', 'features.wifi' => 'WiFi']
+     *
+     * @param string|null $locale
+     * @return array
+     */
+    public function loadTranslations($locale = null)
+    {
+        if (empty($locale)) {
+            $locale = $this->getDefaultLocale();
+        }
+
+        // Get translations from storage.
+        $translations = MonthlyStorage::endpoint('locales')
+            ->locale($locale)
+            ->get();
+
+        // Turn object to array.
+        $translations = json_decode(json_encode($translations), true);
+
+        // Multi dimensions array to dot array.
+        $this->translations[$locale] = Arr::dot($translations);
 
         return $this->translations[$locale];
     }
