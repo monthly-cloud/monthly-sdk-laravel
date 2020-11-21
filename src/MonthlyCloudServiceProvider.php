@@ -55,6 +55,9 @@ class MonthlyCloudServiceProvider extends ServiceProvider
             if ($websiteId = config('monthlycloud.website_id')) {
                 $builder->website($websiteId);
             }
+            if ($marketplaceId = config('monthlycloud.marketplace_id')) {
+                $builder->marketplace($marketplaceId);
+            }
             $builder->locale($this->app->getLocale());
             $builder->setCache(new \MonthlyCloud\Laravel\Cache(config('monthlycloud.cache_store')));
             $builder->cacheTtl(config('monthlycloud.cache_ttl', 60));
