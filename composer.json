@@ -9,17 +9,28 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.0",
         "illuminate/support": "5.*||6.*||7.*||8.*",
         "monthly-cloud/monthly-sdk-php": "^0.7.0"
     },
     "require-dev": {
-		"phpunit/phpunit": "6.5.*"
+        "phpunit/phpunit": "^7.0|^8.0|^9.0",
+        "orchestra/testbench": "^6.13"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MonthlyCloud\\Laravel\\Test\\": "tests"
+        }
     },
     "autoload": {
         "psr-4": {
             "MonthlyCloud\\Laravel\\": "src/"
         }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
+        ]
     },
     "extra": {
         "laravel": {
