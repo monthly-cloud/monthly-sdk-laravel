@@ -28,8 +28,8 @@ class TranslationService
     /**
      * Translate key using storage dictionary.
      *
-     * @param string $key
-     * @param string|null $locale
+     * @param  string  $key
+     * @param  string|null  $locale
      * @return string
      */
     public function translate($key, $locale = null)
@@ -50,7 +50,7 @@ class TranslationService
     /**
      * Get array with translations for locale.
      *
-     * @param string|null $locale
+     * @param  string|null  $locale
      * @return array
      */
     public function getTranslations($locale = null)
@@ -72,7 +72,7 @@ class TranslationService
      * Example output:
      * ['features.internet' => 'Internet', 'features.wifi' => 'WiFi']
      *
-     * @param string|null $locale
+     * @param  string|null  $locale
      * @return array
      */
     public function loadTranslations($locale = null)
