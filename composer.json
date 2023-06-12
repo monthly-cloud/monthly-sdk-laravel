@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=7.0",
-        "illuminate/support": "5.*||6.*||7.*||8.*",
+        "illuminate/support": "5.*||6.*||7.*||8.*||9.*",
         "monthly-cloud/monthly-sdk-php": "^0.8.1"
     },
     "require-dev": {
