@@ -24,7 +24,7 @@ class MonthlyCloudServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/migrations/' => database_path('migrations')
+                __DIR__.'/migrations/' => database_path('migrations'),
             ], 'monthly-sdk-migrations');
         }
     }
