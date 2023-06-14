@@ -22,7 +22,11 @@ class MonthlyCloudServiceProvider extends ServiceProvider
             return new MonthlyCloudUserProvider($app['hash'], $config['model']);
         });
 
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/migrations/' => database_path('migrations')
+            ], 'monthly-sdk-migrations');
+        }
     }
 
     /**
