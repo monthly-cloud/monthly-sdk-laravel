@@ -12,7 +12,7 @@ trait IsMonthlyCloudUser
     /**
      * Set cloud access token.
      *
-     * @param string $accessToken
+     * @param  string  $accessToken
      * @return self
      */
     public function setAccessToken($accessToken)
@@ -39,7 +39,7 @@ trait IsMonthlyCloudUser
      *
      * For example set name equal to cloud label.
      *
-     * @param object $userData
+     * @param  object  $userData
      * @return self
      */
     public function applyUserData($userData)

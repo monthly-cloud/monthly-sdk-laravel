@@ -97,7 +97,7 @@ class MonthlyCloudUserProvider extends EloquentUserProvider
     /**
      * Get user data by access token.
      *
-     * @param string $accessToken
+     * @param  string  $accessToken
      * @return object
      */
     public function getUserDataByAccessToken($accessToken)
@@ -118,7 +118,7 @@ class MonthlyCloudUserProvider extends EloquentUserProvider
     /**
      * Get access token by credentials or false in case of error.
      *
-     * @param array $credentials
+     * @param  array  $credentials
      * @return bool|string
      */
     public function getAccessTokenByCredentials(array $credentials)

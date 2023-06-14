@@ -15,7 +15,7 @@ class Cache implements CacheInterface
     /**
      * Constructor.
      *
-     * @param string $store Cache store
+     * @param  string  $store  Cache store
      * @return void
      */
     public function __construct($store = null)
@@ -30,7 +30,7 @@ class Cache implements CacheInterface
     /**
      * Hash key to avoid issues with special chars.
      *
-     * @param string $key
+     * @param  string  $key
      * @return string
      */
     public function hashKey($key)
@@ -54,8 +54,8 @@ class Cache implements CacheInterface
      * Store an item in the cache for a given number of seconds.
      *
      * @param  string  $key
-     * @param  mixed   $value
-     * @param  int     $ttl
+     * @param  mixed  $value
+     * @param  int  $ttl
      * @return void
      */
     public function put($key, $value, $ttl = 0)
