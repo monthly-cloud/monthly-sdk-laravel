@@ -51,6 +51,7 @@ class MonthlyCloudUserProvider extends EloquentUserProvider
 
                 return $model;
             }
+
             // Wrong crdentials.
             return;
         }
